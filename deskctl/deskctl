@@ -30,6 +30,7 @@ def printBuildFileIfAny(path) :
 
 def searchFiles(path):
     if path not in args.exclude:
+        printBuildFileIfAny(path)
         for file in listdir(path):
             if isfile(join(path, file)) and file != 'BUILD':
                 if args.list:
@@ -37,7 +38,6 @@ def searchFiles(path):
                 else:
                     openFile(join(path, file))
             elif isdir(join(path, file)):
-                printBuildFileIfAny(join(path, file))
                 # TODO: it looks ugly, i dont like concatenating "/".
                 searchFiles(join(path, file + "/"))
 
